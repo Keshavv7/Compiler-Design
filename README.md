@@ -12,8 +12,8 @@ This repository contains a collection of lexers and grammars written using Lex/F
 
 ## STEPS TO RUN THE FILES
 
-### Step 1: Open this directory in terminal (Linux/macOS) / Command Prompt or Powershell (Windows)
-### Step 2: Run the following commands
+**Step 1:** Open this directory in terminal (Linux/macOS) / Command Prompt or Powershell (Windows)
+**Step 2:** Run the following commands
 
 ```
 make clean
