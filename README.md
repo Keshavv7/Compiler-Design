@@ -11,9 +11,9 @@ Follow the instructions in this link to install lex and yacc: [Click here](https
 This repository contains a collection of lexers and grammars written using Lex/Flex. These lexers are designed to tokenize input C code and recognize specific patterns in the code. The grammars are implemented to parse and analyze context-free grammars (CFGs) and regular grammars (RGs).
 
 
-### STEPS TO RUN THE FILES
+### Steps to run the files
 
-**Step 1:** Open this directory in terminal (Linux/macOS) / Command Prompt or Powershell (Windows)
+**Step 1:** Open the directory **cs21b027_labx** in terminal.
 **Step 2:** Run the following commands
 
 ```
