@@ -13,7 +13,7 @@ This repository contains a collection of lexers and grammars written using Lex/F
 
 ### Steps to run the files
 
-**Step 1:** Open the directory **cs21b027_labx** in terminal. \n
+**Step 1:** Open the directory **cs21b027_labx** in terminal. <br>
 **Step 2:** Run the following commands
 
 ```
