@@ -1,6 +1,6 @@
 ## STEPS TO RUN THE FILES
 
-### Step 1: Open this directory in terminal (Linux/macOS) / Command Prompt or Powershell (Windows)
+### Step 1: Open this directory in terminal (Linux/macOS)
 
 ### Step 2: Run the following commands
 
