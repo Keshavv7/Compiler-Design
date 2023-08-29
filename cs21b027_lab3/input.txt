@@ -1,0 +1,10 @@
+i+i*
+i+i
+25 + myNum *z3
+1+i*j
++i
+abc
+numArray*
+(a+b)*23+(z1+z2)
+2.5 + a1 * (a+2)
+abcd&d=5
