@@ -1,14 +1,14 @@
+
 CFLAGS=-g -DDEBUG
-LINKERFLAG=-lfl
 CC=gcc
 
-all:lexer	
+all: mylexer
 
-lexer: lex.yy.c 
-	$(CC) $(CFLAGS) lex.yy.c -o lexer $(LINKERFLAG)
+mylexer: lex.yy.c
+	$(CC) $(CFLAGS) lex.yy.c -o mylexer -ll
 
-lex.yy.c: $(fname)
-	flex $(fname)
+lex.yy.c: ip.l
+	lex ip.l
 
 clean: 
-	rm -f lexer lex.yy.c
+	rm -f *.o lex.yy.c mylexer

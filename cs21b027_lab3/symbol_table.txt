@@ -1,0 +1,24 @@
+Line: 1, Token: HEADER, Lexeme: #include <stdio.h>, Type: header, Size: 8
+Line: 2, Token: KEYWORD, Lexeme: int, Type: n/a, Size: 8
+Line: 2, Token: VARIABLE, Lexeme: main, Type: identifier, Size: 8
+Line: 3, Token: KEYWORD, Lexeme: int, Type: n/a, Size: 8
+Line: 3, Token: VARIABLE, Lexeme: a, Type: identifier, Size: 8
+Line: 3, Token: INTCONST, Lexeme: 9, Type: int, Size: 4
+Line: 4, Token: KEYWORD, Lexeme: int, Type: n/a, Size: 8
+Line: 4, Token: VARIABLE, Lexeme: b, Type: identifier, Size: 8
+Line: 4, Token: INTCONST, Lexeme: 10, Type: int, Size: 4
+Line: 5, Token: VARIABLE, Lexeme: printf, Type: identifier, Size: 8
+Line: 5, Token: VARIABLE, Lexeme: a, Type: identifier, Size: 8
+Line: 5, Token: VARIABLE, Lexeme: b, Type: identifier, Size: 8
+Line: 6, Token: KEYWORD, Lexeme: for, Type: n/a, Size: 8
+Line: 6, Token: KEYWORD, Lexeme: int, Type: n/a, Size: 8
+Line: 6, Token: VARIABLE, Lexeme: i, Type: identifier, Size: 8
+Line: 6, Token: INTCONST, Lexeme: 0, Type: int, Size: 4
+Line: 6, Token: VARIABLE, Lexeme: i, Type: identifier, Size: 8
+Line: 6, Token: VARIABLE, Lexeme: a, Type: identifier, Size: 8
+Line: 6, Token: VARIABLE, Lexeme: i, Type: identifier, Size: 8
+Line: 7, Token: VARIABLE, Lexeme: printf, Type: identifier, Size: 8
+Line: 7, Token: VARIABLE, Lexeme: i, Type: identifier, Size: 8
+Line: 7, Token: INTCONST, Lexeme: 1, Type: int, Size: 4
+Line: 9, Token: KEYWORD, Lexeme: return, Type: n/a, Size: 8
+Line: 9, Token: INTCONST, Lexeme: 0, Type: int, Size: 4
