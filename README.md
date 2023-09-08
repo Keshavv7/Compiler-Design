@@ -13,7 +13,7 @@ This repository contains a collection of lexers and grammars written using Lex/F
 
 ### Steps to run the files
 
-**Step 1:** Open the directory **cs21b027_labx** in terminal. \newline
+**Step 1:** Open the directory **cs21b027_labx** in terminal. <br>
 **Step 2:** Run the following commands
 
 ```
@@ -22,8 +22,8 @@ make fname=lexer.l
 ./lexer input.txt
 ```
 
-> Note that you can rename **lexer.l** as whichever lex file you want to compile.
-> Replace **./lexer** with the executable file created after make command: **./<filename>**
+> Note that you can rename **lexer.l** as whichever lex file you want to compile. <br>
+> Replace **./lexer** with the executable file created after make command: **./filename** <br>
 > Also, you can use any input file apart from **input.txt**.
 
 
