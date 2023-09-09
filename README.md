@@ -8,7 +8,7 @@ This repository includes files from my Compiler Design Laboratory course (CS301P
 Follow the instructions in this link to install lex and yacc: [Click here](https://faculty.ksu.edu.sa/sites/default/files/lex_and_yacc_installation.pdf)
 
 ### Lexers and Grammars for C Syntax and CFGs and other Grammars
-This repository contains a collection of lexers and grammars written using Lex/Flex. These lexers are designed to tokenize input C code and recognize specific patterns in the code. The grammars are implemented to parse and analyze context-free grammars (CFGs) and regular grammars (RGs), and are implemented YACC.
+This repository contains a collection of lexers and grammars written using Lex/Flex. These lexers are designed to tokenize input C code and recognize specific patterns in the code. The grammars are implemented to parse and analyze context-free grammars (CFGs) and regular grammars (RGs), and are implemented using YACC.
 
 
 ### Steps to run the files
