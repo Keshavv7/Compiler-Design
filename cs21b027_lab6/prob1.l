@@ -6,12 +6,12 @@ int inValid = 1; // Assume it's invalid unless proven otherwise
 %option noyywrap
 
 ID ([_a-zA-Z][_a-zA-Z0-9]*)
-NUMBER ([0-9]+|([0-9]*\.[0-9]+)([eE][-+]?[0-9]+)?)
+NUMBER -?([0-9]+|([0-9]*\.[0-9]+)([eE][-+]?[0-9]+)?)
 
 
 %%
 
-[ \t\n]+          /* Ignore whitespace and tabs */
+[ \t]+          /* Ignore whitespace and tabs */
 {ID}                         { return ID; }
 "++"                         { return INC; }
 "--"                         { return DEC; }
@@ -24,6 +24,7 @@ NUMBER ([0-9]+|([0-9]*\.[0-9]+)([eE][-+]?[0-9]+)?)
 ")"                          { return RPAREN; }
 {NUMBER}                     { return NUM; }
 ";"                          { return SEMICOLON; }
+"\n"                         { return EOL; }
 .                            { return yytext[0]; }
 
 

@@ -65,7 +65,8 @@ extern int yydebug;
     RPAREN = 266,                  /* RPAREN  */
     ID = 267,                      /* ID  */
     NUM = 268,                     /* NUM  */
-    SEMICOLON = 269                /* SEMICOLON  */
+    SEMICOLON = 269,               /* SEMICOLON  */
+    EOL = 270                      /* EOL  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -86,6 +87,7 @@ extern int yydebug;
 #define ID 267
 #define NUM 268
 #define SEMICOLON 269
+#define EOL 270
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

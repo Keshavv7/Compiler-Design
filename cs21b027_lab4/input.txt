@@ -2,6 +2,7 @@ i * i * i + i
 i + i + i
 x + y + 3
 x * (y + z)
+i / z
 abc?==de
 i+i
 25 + myNum *z3

@@ -354,8 +354,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 15
-#define YY_END_OF_BUFFER 16
+#define YY_NUM_RULES 16
+#define YY_END_OF_BUFFER 17
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -365,9 +365,9 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[29] =
     {   0,
-        0,    0,   16,   14,    1,    1,   10,   11,    8,    6,
-        7,   14,    9,   12,   13,    5,    2,    1,    3,    4,
-       12,    0,   12,    2,    0,    0,   12,    0
+        0,    0,   17,   15,    1,   14,   10,   11,    8,    6,
+        7,   15,    9,   12,   13,    5,    2,    1,    3,    4,
+        0,   12,   12,    2,    0,    0,   12,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -410,9 +410,9 @@ static const YY_CHAR yy_meta[16] =
 
 static const flex_int16_t yy_base[31] =
     {   0,
-        0,    0,   39,   40,   14,   16,   40,   40,   40,   31,
-       29,   25,   40,   11,   40,   40,    0,   21,   40,   40,
-       10,   24,   17,    0,   23,   22,   16,   40,   26,   29
+        0,    0,   37,   38,   34,   38,   38,   38,   38,   28,
+        8,   23,   38,    9,   38,   38,    0,   31,   38,   38,
+       21,   12,   11,    0,   20,   14,   13,   38,   24,   27
     } ;
 
 static const flex_int16_t yy_def[31] =
@@ -422,24 +422,24 @@ static const flex_int16_t yy_def[31] =
        28,   28,   28,   29,   30,   28,   28,    0,   28,   28
     } ;
 
-static const flex_int16_t yy_nxt[56] =
+static const flex_int16_t yy_nxt[54] =
     {   0,
         4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
-       14,   15,   16,   17,   17,   18,   18,   18,   18,   22,
-       21,   23,   18,   18,   25,   22,   27,   23,   24,   24,
-       26,   26,   27,   27,   21,   21,   20,   19,   28,    3,
+       14,   15,   16,   17,   17,   20,   21,   21,   22,   22,
+       21,   23,   22,   27,   27,   25,   24,   24,   26,   26,
+       27,   23,   18,   23,   19,   18,   28,    3,   28,   28,
        28,   28,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28
+       28,   28,   28
     } ;
 
-static const flex_int16_t yy_chk[56] =
+static const flex_int16_t yy_chk[54] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    5,    5,    6,    6,   14,
-       21,   14,   18,   18,   21,   23,   27,   23,   29,   29,
-       30,   30,   26,   25,   22,   12,   11,   10,    3,   28,
+        1,    1,    1,    1,    1,   11,   11,   14,   11,   14,
+       22,   23,   22,   27,   26,   23,   29,   29,   30,   30,
+       25,   21,   18,   12,   10,    5,    3,   28,   28,   28,
        28,   28,   28,   28,   28,   28,   28,   28,   28,   28,
-       28,   28,   28,   28,   28
+       28,   28,   28
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -714,7 +714,7 @@ yy_match:
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 40 );
+		while ( yy_base[yy_current_state] != 38 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -739,7 +739,6 @@ do_action:	/* This label is used only to access EOF actions. */
 			goto yy_find_action;
 
 case 1:
-/* rule 1 can match eol */
 YY_RULE_SETUP
 #line 14 "prob1.l"
 /* Ignore whitespace and tabs */
@@ -805,16 +804,22 @@ YY_RULE_SETUP
 { return SEMICOLON; }
 	YY_BREAK
 case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
 #line 27 "prob1.l"
-{ return yytext[0]; }
+{ return EOL; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 30 "prob1.l"
+#line 28 "prob1.l"
+{ return yytext[0]; }
+	YY_BREAK
+case 16:
+YY_RULE_SETUP
+#line 31 "prob1.l"
 ECHO;
 	YY_BREAK
-#line 818 "lex.yy.c"
+#line 823 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1819,6 +1824,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 30 "prob1.l"
+#line 31 "prob1.l"
 
 

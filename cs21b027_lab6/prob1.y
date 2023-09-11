@@ -2,23 +2,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+int line = 1;
 int yylex();
 void yyerror(const char* s);
 extern char* yytext;
 extern FILE* yyin;
 %}
 
-%token INC DEC ASSIGN PLUS MINUS MUL DIV LPAREN RPAREN ID NUM SEMICOLON
+%token INC DEC ASSIGN PLUS MINUS MUL DIV LPAREN RPAREN ID NUM SEMICOLON EOL
 
 
 %%
 
-input: stmt SEMICOLON input | stmt SEMICOLON | error SEMICOLON { printf("INVALID\n"); } input | error SEMICOLON { printf("INVALID\n"); }
+input: stmt input 
+    | stmt 
+    | error SEMICOLON { printf("Line %d: INVALID\n", line); line++; } EOL input
+    | error SEMICOLON { printf("Line %d: INVALID\n", line); line++; }
+    | error EOL { printf("Line %d: INVALID\n", line); line++; } input
     ;
 
-stmt: assign_stmt { printf("VALID: Proper Assignment Statement\n"); }
-        | pre_expr { printf("VALID: Proper Pre-Operation\n"); }
-        | post_expr { printf("VALID: Proper Post-Operation\n"); }
+stmt: assign_stmt SEMICOLON EOL { printf("Line %d: VALID: Assignment Statement\n", line); line++;}
+        | pre_expr SEMICOLON EOL { printf("Line %d: VALID: Pre-Operation\n", line); line++;}
+        | post_expr SEMICOLON EOL { printf("Line %d: VALID: Post-Operation\n", line); line++;}
+        | assign_stmt SEMICOLON { printf("Line %d: VALID: Assignment Statement\n", line); line++;}
+        | pre_expr SEMICOLON { printf("Line %d: VALID: Pre-Operation\n", line); line++;}
+        | post_expr SEMICOLON { printf("Line %d: VALID: Post-Operation\n", line); line++;}
+        | assign_stmt EOL { printf("Line %d: INVALID: No semicolon\n", line); line++; }
+        | pre_expr EOL { printf("Line %d: INVALID: No semicolon\n", line); line++; }
+        | post_expr EOL { printf("Line %d: INVALID: No semicolon\n", line); line++; }
         ;
 
 assign_stmt: ID ASSIGN expr
@@ -42,7 +53,8 @@ term: term MUL factor
     | factor
     ;
 
-factor: LPAREN expr RPAREN
+factor: MINUS LPAREN expr RPAREN
+    | LPAREN expr RPAREN
     | ID
     | NUM
     | pre_expr
