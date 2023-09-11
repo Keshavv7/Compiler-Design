@@ -11,7 +11,7 @@ Follow the instructions in this link to install lex and yacc: [Click here](https
 This repository contains a collection of lexers and grammars written using Lex/Flex. These lexers are designed to tokenize input C code and recognize specific patterns in the code. The grammars are implemented to parse and analyze context-free grammars (CFGs) and regular grammars (RGs), and are implemented using YACC.
 
 
-### Steps to run the files
+### Steps to run the files from lab1 to lab4
 
 **Step 1:** Open the directory **cs21b027_labx** in terminal. <br>
 **Step 2:** Run the following commands
@@ -22,8 +22,20 @@ make fname=lexer.l
 ./lexer input.txt
 ```
 
+### Steps to run the files from lab5
+
+**Step 1:** Open the directory **cs21b027_labx** in terminal. <br>
+**Step 2:** Run the following commands
+
+```
+make clean
+make fname=prob1
+./parser input.txt
+```
+
 > Note that you can rename **lexer.l** as whichever lex file you want to compile. <br>
 > Replace **./lexer** with the executable file created after make command: **./filename** <br>
+> Replace **prob1** with whichever file you are compiling, for example: **prob2** <br>
 > Also, you can use any input file apart from **input.txt**.
 
 
