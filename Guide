@@ -1,0 +1,5 @@
+// Compiling lex files
+
+lex <filename.l>
+gcc lex.yy.c
+./a.out
