@@ -1,5 +1,4 @@
-# To implement the translation of different program constructs (arithmetic expressions and
-selection statements) to equivalent three address codes.
+# To implement the translation of different program constructs (arithmetic expressions and selection statements) to equivalent three address codes.
 
 ## Implement a CFG grammar with associated semantic rules to translate the arithmetic expressions (including post/pre increment/decrement operators as completed in Lab #6) and two-way selection statements of C language to equivalent three address code.
 
