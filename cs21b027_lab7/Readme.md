@@ -1,3 +1,7 @@
+# Pre-order and post-order of the input expressions
+
+## Output the pre-order and postorder of the input expressions(from the input file) using parse tree. 
+
 ## For running prob1:
 ```
 make fname=prob1
