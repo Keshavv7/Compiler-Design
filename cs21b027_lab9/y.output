@@ -1,0 +1,1324 @@
+   0  $accept : STMTS $end
+
+   1  $$1 :
+
+   2  STMTS : STMT SEP $$1 STMTS
+
+   3  $$2 :
+
+   4  $$3 :
+
+   5  STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF
+
+   6  $$4 :
+
+   7  $$5 :
+
+   8  $$6 :
+
+   9  STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS
+  10        |
+
+  11  $$7 :
+
+  12  $$8 :
+
+  13  FURTHERIF : ELSE $$7 OPENCB STMTS CLOSECB $$8 STMTS
+
+  14  $$9 :
+
+  15  FURTHERIF : $$9 STMTS
+
+  16  STMT : V EQUALS E
+  17       | ABCD
+
+  18  E : E PLUS T
+  19    | E MINUS T
+  20    | T
+
+  21  T : T MUL F
+  22    | T DIV F
+  23    | F
+
+  24  F : K POW F
+  25    | K
+
+  26  K : V
+  27    | I
+  28    | B
+  29    | N
+
+  30  N : ABCD
+  31    | OPENB E CLOSEB
+  32    | MINUS OPENB E CLOSEB
+
+  33  ABCD : DOUBLEPLUS V
+  34       | DOUBLEMINUS V
+  35       | V DOUBLEPLUS
+  36       | V DOUBLEMINUS
+
+  37  I : FLOAT
+  38    | POSNUMBER
+  39    | MINUS POSNUMBER
+
+  40  V : VARIABLE
+  41    | MINUS VARIABLE
+
+  42  B : BOOLTRUE
+  43    | BOOLFALSE
+
+  44  BOOLEXPR : BOOL BOOLOP BOOLEXPR
+  45           | BOOL
+
+  46  BOOL : E RELOP E
+  47       | E
+  48       | OPENB BOOLEXPR CLOSEB
+  49       | NOT BOOL
+
+  50  BOOLOP : AND
+  51         | OR
+
+  52  RELOP : LESSTHAN
+  53        | GREATERTHAN
+  54        | LESSTHANOREQUALTO
+  55        | GREATERTHANOREQUALTO
+  56        | DOUBLEEQUAL
+  57        | NOTEQUAL
+
+state 0
+	$accept : . STMTS $end  (0)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	$end  reduce 10
+
+	STMTS  goto 7
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 1
+	V : MINUS . VARIABLE  (41)
+
+	VARIABLE  shift 11
+	.  error
+
+
+state 2
+	ABCD : DOUBLEPLUS . V  (33)
+
+	MINUS  shift 1
+	VARIABLE  shift 4
+	.  error
+
+	V  goto 12
+
+
+state 3
+	ABCD : DOUBLEMINUS . V  (34)
+
+	MINUS  shift 1
+	VARIABLE  shift 4
+	.  error
+
+	V  goto 13
+
+
+state 4
+	V : VARIABLE .  (40)
+
+	.  reduce 40
+
+
+state 5
+	STMTS : IF . OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF  (5)
+
+	OPENB  shift 14
+	.  error
+
+
+state 6
+	STMTS : WHILE . $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS  (9)
+	$$4 : .  (6)
+
+	.  reduce 6
+
+	$$4  goto 15
+
+
+state 7
+	$accept : STMTS . $end  (0)
+
+	$end  accept
+
+
+state 8
+	STMT : V . EQUALS E  (16)
+	ABCD : V . DOUBLEPLUS  (35)
+	ABCD : V . DOUBLEMINUS  (36)
+
+	DOUBLEPLUS  shift 16
+	DOUBLEMINUS  shift 17
+	EQUALS  shift 18
+	.  error
+
+
+state 9
+	STMT : ABCD .  (17)
+
+	.  reduce 17
+
+
+state 10
+	STMTS : STMT . SEP $$1 STMTS  (2)
+
+	SEP  shift 19
+	.  error
+
+
+state 11
+	V : MINUS VARIABLE .  (41)
+
+	.  reduce 41
+
+
+state 12
+	ABCD : DOUBLEPLUS V .  (33)
+
+	.  reduce 33
+
+
+state 13
+	ABCD : DOUBLEMINUS V .  (34)
+
+	.  reduce 34
+
+
+state 14
+	STMTS : IF OPENB . BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF  (5)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 23
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	NOT  shift 24
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 27
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+	BOOLEXPR  goto 36
+	BOOL  goto 37
+
+
+state 15
+	STMTS : WHILE $$4 . OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS  (9)
+
+	OPENB  shift 38
+	.  error
+
+
+state 16
+	ABCD : V DOUBLEPLUS .  (35)
+
+	.  reduce 35
+
+
+state 17
+	ABCD : V DOUBLEMINUS .  (36)
+
+	.  reduce 36
+
+
+state 18
+	STMT : V EQUALS . E  (16)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 40
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 19
+	STMTS : STMT SEP . $$1 STMTS  (2)
+	$$1 : .  (1)
+
+	.  reduce 1
+
+	$$1  goto 41
+
+
+state 20
+	I : POSNUMBER .  (38)
+
+	.  reduce 38
+
+
+state 21
+	I : FLOAT .  (37)
+
+	.  reduce 37
+
+
+state 22
+	N : MINUS . OPENB E CLOSEB  (32)
+	I : MINUS . POSNUMBER  (39)
+	V : MINUS . VARIABLE  (41)
+
+	POSNUMBER  shift 42
+	OPENB  shift 43
+	VARIABLE  shift 11
+	.  error
+
+
+state 23
+	N : OPENB . E CLOSEB  (31)
+	BOOL : OPENB . BOOLEXPR CLOSEB  (48)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 23
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	NOT  shift 24
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 44
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+	BOOLEXPR  goto 45
+	BOOL  goto 37
+
+
+state 24
+	BOOL : NOT . BOOL  (49)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 23
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	NOT  shift 24
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 27
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+	BOOL  goto 46
+
+
+state 25
+	B : BOOLTRUE .  (42)
+
+	.  reduce 42
+
+
+state 26
+	B : BOOLFALSE .  (43)
+
+	.  reduce 43
+
+
+state 27
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+	BOOL : E . RELOP E  (46)
+	BOOL : E .  (47)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	DOUBLEEQUAL  shift 49
+	NOTEQUAL  shift 50
+	LESSTHANOREQUALTO  shift 51
+	GREATERTHANOREQUALTO  shift 52
+	LESSTHAN  shift 53
+	GREATERTHAN  shift 54
+	CLOSEB  reduce 47
+	AND  reduce 47
+	OR  reduce 47
+
+	RELOP  goto 55
+
+
+state 28
+	E : T .  (20)
+	T : T . MUL F  (21)
+	T : T . DIV F  (22)
+
+	MUL  shift 56
+	DIV  shift 57
+	PLUS  reduce 20
+	MINUS  reduce 20
+	SEP  reduce 20
+	CLOSEB  reduce 20
+	DOUBLEEQUAL  reduce 20
+	NOTEQUAL  reduce 20
+	LESSTHANOREQUALTO  reduce 20
+	GREATERTHANOREQUALTO  reduce 20
+	LESSTHAN  reduce 20
+	GREATERTHAN  reduce 20
+	AND  reduce 20
+	OR  reduce 20
+
+
+state 29
+	T : F .  (23)
+
+	.  reduce 23
+
+
+state 30
+	F : K . POW F  (24)
+	F : K .  (25)
+
+	POW  shift 58
+	PLUS  reduce 25
+	MINUS  reduce 25
+	SEP  reduce 25
+	MUL  reduce 25
+	DIV  reduce 25
+	CLOSEB  reduce 25
+	DOUBLEEQUAL  reduce 25
+	NOTEQUAL  reduce 25
+	LESSTHANOREQUALTO  reduce 25
+	GREATERTHANOREQUALTO  reduce 25
+	LESSTHAN  reduce 25
+	GREATERTHAN  reduce 25
+	AND  reduce 25
+	OR  reduce 25
+
+
+state 31
+	K : B .  (28)
+
+	.  reduce 28
+
+
+state 32
+	K : N .  (29)
+
+	.  reduce 29
+
+
+state 33
+	K : I .  (27)
+
+	.  reduce 27
+
+
+state 34
+	K : V .  (26)
+	ABCD : V . DOUBLEPLUS  (35)
+	ABCD : V . DOUBLEMINUS  (36)
+
+	DOUBLEPLUS  shift 16
+	DOUBLEMINUS  shift 17
+	PLUS  reduce 26
+	MINUS  reduce 26
+	SEP  reduce 26
+	MUL  reduce 26
+	DIV  reduce 26
+	POW  reduce 26
+	CLOSEB  reduce 26
+	DOUBLEEQUAL  reduce 26
+	NOTEQUAL  reduce 26
+	LESSTHANOREQUALTO  reduce 26
+	GREATERTHANOREQUALTO  reduce 26
+	LESSTHAN  reduce 26
+	GREATERTHAN  reduce 26
+	AND  reduce 26
+	OR  reduce 26
+
+
+state 35
+	N : ABCD .  (30)
+
+	.  reduce 30
+
+
+state 36
+	STMTS : IF OPENB BOOLEXPR . CLOSEB $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF  (5)
+
+	CLOSEB  shift 59
+	.  error
+
+
+state 37
+	BOOLEXPR : BOOL . BOOLOP BOOLEXPR  (44)
+	BOOLEXPR : BOOL .  (45)
+
+	AND  shift 60
+	OR  shift 61
+	CLOSEB  reduce 45
+
+	BOOLOP  goto 62
+
+
+state 38
+	STMTS : WHILE $$4 OPENB . BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS  (9)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 23
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	NOT  shift 24
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 27
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+	BOOLEXPR  goto 63
+	BOOL  goto 37
+
+
+state 39
+	N : OPENB . E CLOSEB  (31)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 64
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 40
+	STMT : V EQUALS E .  (16)
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	SEP  reduce 16
+
+
+state 41
+	STMTS : STMT SEP $$1 . STMTS  (2)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	$end  reduce 10
+	CLOSECB  reduce 10
+
+	STMTS  goto 65
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 42
+	I : MINUS POSNUMBER .  (39)
+
+	.  reduce 39
+
+
+state 43
+	N : MINUS OPENB . E CLOSEB  (32)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 66
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+44: shift/reduce conflict (shift 67, reduce 47) on CLOSEB
+state 44
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+	N : OPENB E . CLOSEB  (31)
+	BOOL : E . RELOP E  (46)
+	BOOL : E .  (47)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	CLOSEB  shift 67
+	DOUBLEEQUAL  shift 49
+	NOTEQUAL  shift 50
+	LESSTHANOREQUALTO  shift 51
+	GREATERTHANOREQUALTO  shift 52
+	LESSTHAN  shift 53
+	GREATERTHAN  shift 54
+	AND  reduce 47
+	OR  reduce 47
+
+	RELOP  goto 55
+
+
+state 45
+	BOOL : OPENB BOOLEXPR . CLOSEB  (48)
+
+	CLOSEB  shift 68
+	.  error
+
+
+state 46
+	BOOL : NOT BOOL .  (49)
+
+	.  reduce 49
+
+
+state 47
+	E : E PLUS . T  (18)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	T  goto 69
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 48
+	E : E MINUS . T  (19)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	T  goto 70
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 49
+	RELOP : DOUBLEEQUAL .  (56)
+
+	.  reduce 56
+
+
+state 50
+	RELOP : NOTEQUAL .  (57)
+
+	.  reduce 57
+
+
+state 51
+	RELOP : LESSTHANOREQUALTO .  (54)
+
+	.  reduce 54
+
+
+state 52
+	RELOP : GREATERTHANOREQUALTO .  (55)
+
+	.  reduce 55
+
+
+state 53
+	RELOP : LESSTHAN .  (52)
+
+	.  reduce 52
+
+
+state 54
+	RELOP : GREATERTHAN .  (53)
+
+	.  reduce 53
+
+
+state 55
+	BOOL : E RELOP . E  (46)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 71
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 56
+	T : T MUL . F  (21)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	F  goto 72
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 57
+	T : T DIV . F  (22)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	F  goto 73
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 58
+	F : K POW . F  (24)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 39
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	F  goto 74
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+
+
+state 59
+	STMTS : IF OPENB BOOLEXPR CLOSEB . $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF  (5)
+	$$2 : .  (3)
+
+	.  reduce 3
+
+	$$2  goto 75
+
+
+state 60
+	BOOLOP : AND .  (50)
+
+	.  reduce 50
+
+
+state 61
+	BOOLOP : OR .  (51)
+
+	.  reduce 51
+
+
+state 62
+	BOOLEXPR : BOOL BOOLOP . BOOLEXPR  (44)
+
+	POSNUMBER  shift 20
+	FLOAT  shift 21
+	MINUS  shift 22
+	OPENB  shift 23
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	NOT  shift 24
+	BOOLTRUE  shift 25
+	BOOLFALSE  shift 26
+	.  error
+
+	E  goto 27
+	T  goto 28
+	F  goto 29
+	K  goto 30
+	B  goto 31
+	N  goto 32
+	I  goto 33
+	V  goto 34
+	ABCD  goto 35
+	BOOLEXPR  goto 76
+	BOOL  goto 37
+
+
+state 63
+	STMTS : WHILE $$4 OPENB BOOLEXPR . CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS  (9)
+
+	CLOSEB  shift 77
+	.  error
+
+
+state 64
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+	N : OPENB E . CLOSEB  (31)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	CLOSEB  shift 67
+	.  error
+
+
+state 65
+	STMTS : STMT SEP $$1 STMTS .  (2)
+
+	.  reduce 2
+
+
+state 66
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+	N : MINUS OPENB E . CLOSEB  (32)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	CLOSEB  shift 78
+	.  error
+
+
+state 67
+	N : OPENB E CLOSEB .  (31)
+
+	.  reduce 31
+
+
+state 68
+	BOOL : OPENB BOOLEXPR CLOSEB .  (48)
+
+	.  reduce 48
+
+
+state 69
+	E : E PLUS T .  (18)
+	T : T . MUL F  (21)
+	T : T . DIV F  (22)
+
+	MUL  shift 56
+	DIV  shift 57
+	PLUS  reduce 18
+	MINUS  reduce 18
+	SEP  reduce 18
+	CLOSEB  reduce 18
+	DOUBLEEQUAL  reduce 18
+	NOTEQUAL  reduce 18
+	LESSTHANOREQUALTO  reduce 18
+	GREATERTHANOREQUALTO  reduce 18
+	LESSTHAN  reduce 18
+	GREATERTHAN  reduce 18
+	AND  reduce 18
+	OR  reduce 18
+
+
+state 70
+	E : E MINUS T .  (19)
+	T : T . MUL F  (21)
+	T : T . DIV F  (22)
+
+	MUL  shift 56
+	DIV  shift 57
+	PLUS  reduce 19
+	MINUS  reduce 19
+	SEP  reduce 19
+	CLOSEB  reduce 19
+	DOUBLEEQUAL  reduce 19
+	NOTEQUAL  reduce 19
+	LESSTHANOREQUALTO  reduce 19
+	GREATERTHANOREQUALTO  reduce 19
+	LESSTHAN  reduce 19
+	GREATERTHAN  reduce 19
+	AND  reduce 19
+	OR  reduce 19
+
+
+state 71
+	E : E . PLUS T  (18)
+	E : E . MINUS T  (19)
+	BOOL : E RELOP E .  (46)
+
+	PLUS  shift 47
+	MINUS  shift 48
+	CLOSEB  reduce 46
+	AND  reduce 46
+	OR  reduce 46
+
+
+state 72
+	T : T MUL F .  (21)
+
+	.  reduce 21
+
+
+state 73
+	T : T DIV F .  (22)
+
+	.  reduce 22
+
+
+state 74
+	F : K POW F .  (24)
+
+	.  reduce 24
+
+
+state 75
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 . OPENCB $$3 STMTS CLOSECB FURTHERIF  (5)
+
+	OPENCB  shift 79
+	.  error
+
+
+state 76
+	BOOLEXPR : BOOL BOOLOP BOOLEXPR .  (44)
+
+	.  reduce 44
+
+
+state 77
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB . $$5 OPENCB STMTS CLOSECB $$6 STMTS  (9)
+	$$5 : .  (7)
+
+	.  reduce 7
+
+	$$5  goto 80
+
+
+state 78
+	N : MINUS OPENB E CLOSEB .  (32)
+
+	.  reduce 32
+
+
+state 79
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB . $$3 STMTS CLOSECB FURTHERIF  (5)
+	$$3 : .  (4)
+
+	.  reduce 4
+
+	$$3  goto 81
+
+
+state 80
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 . OPENCB STMTS CLOSECB $$6 STMTS  (9)
+
+	OPENCB  shift 82
+	.  error
+
+
+state 81
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 . STMTS CLOSECB FURTHERIF  (5)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	CLOSECB  reduce 10
+
+	STMTS  goto 83
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 82
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB . STMTS CLOSECB $$6 STMTS  (9)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	CLOSECB  reduce 10
+
+	STMTS  goto 84
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 83
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS . CLOSECB FURTHERIF  (5)
+
+	CLOSECB  shift 85
+	.  error
+
+
+state 84
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS . CLOSECB $$6 STMTS  (9)
+
+	CLOSECB  shift 86
+	.  error
+
+
+state 85
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS CLOSECB . FURTHERIF  (5)
+	$$9 : .  (14)
+
+	ELSE  shift 87
+	$end  reduce 14
+	MINUS  reduce 14
+	DOUBLEPLUS  reduce 14
+	DOUBLEMINUS  reduce 14
+	VARIABLE  reduce 14
+	IF  reduce 14
+	CLOSECB  reduce 14
+	WHILE  reduce 14
+
+	FURTHERIF  goto 88
+	$$9  goto 89
+
+
+state 86
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB . $$6 STMTS  (9)
+	$$6 : .  (8)
+
+	.  reduce 8
+
+	$$6  goto 90
+
+
+state 87
+	FURTHERIF : ELSE . $$7 OPENCB STMTS CLOSECB $$8 STMTS  (13)
+	$$7 : .  (11)
+
+	.  reduce 11
+
+	$$7  goto 91
+
+
+state 88
+	STMTS : IF OPENB BOOLEXPR CLOSEB $$2 OPENCB $$3 STMTS CLOSECB FURTHERIF .  (5)
+
+	.  reduce 5
+
+
+state 89
+	FURTHERIF : $$9 . STMTS  (15)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	$end  reduce 10
+	CLOSECB  reduce 10
+
+	STMTS  goto 92
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 90
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 . STMTS  (9)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	$end  reduce 10
+	CLOSECB  reduce 10
+
+	STMTS  goto 93
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 91
+	FURTHERIF : ELSE $$7 . OPENCB STMTS CLOSECB $$8 STMTS  (13)
+
+	OPENCB  shift 94
+	.  error
+
+
+state 92
+	FURTHERIF : $$9 STMTS .  (15)
+
+	.  reduce 15
+
+
+state 93
+	STMTS : WHILE $$4 OPENB BOOLEXPR CLOSEB $$5 OPENCB STMTS CLOSECB $$6 STMTS .  (9)
+
+	.  reduce 9
+
+
+state 94
+	FURTHERIF : ELSE $$7 OPENCB . STMTS CLOSECB $$8 STMTS  (13)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	CLOSECB  reduce 10
+
+	STMTS  goto 95
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 95
+	FURTHERIF : ELSE $$7 OPENCB STMTS . CLOSECB $$8 STMTS  (13)
+
+	CLOSECB  shift 96
+	.  error
+
+
+state 96
+	FURTHERIF : ELSE $$7 OPENCB STMTS CLOSECB . $$8 STMTS  (13)
+	$$8 : .  (12)
+
+	.  reduce 12
+
+	$$8  goto 97
+
+
+state 97
+	FURTHERIF : ELSE $$7 OPENCB STMTS CLOSECB $$8 . STMTS  (13)
+	STMTS : .  (10)
+
+	MINUS  shift 1
+	DOUBLEPLUS  shift 2
+	DOUBLEMINUS  shift 3
+	VARIABLE  shift 4
+	IF  shift 5
+	WHILE  shift 6
+	$end  reduce 10
+	CLOSECB  reduce 10
+
+	STMTS  goto 98
+	V  goto 8
+	ABCD  goto 9
+	STMT  goto 10
+
+
+state 98
+	FURTHERIF : ELSE $$7 OPENCB STMTS CLOSECB $$8 STMTS .  (13)
+
+	.  reduce 13
+
+
+State 44 contains 1 shift/reduce conflict.
+
+
+34 terminals, 26 nonterminals
+58 grammar rules, 99 states
+
+grammar parser grammar
+symbol# value# symbol
+     0      0  $end
+     1    256  error
+     2    257  POSNUMBER
+     3    258  FLOAT
+     4    259  PLUS
+     5    260  MINUS
+     6    261  SEP
+     7    262  MUL
+     8    263  DIV
+     9    264  POW
+    10    265  OPENB
+    11    266  CLOSEB
+    12    267  DOUBLEPLUS
+    13    268  DOUBLEMINUS
+    14    269  VARIABLE
+    15    270  EQUALS
+    16    271  IF
+    17    272  ELSE
+    18    273  OPENCB
+    19    274  CLOSECB
+    20    275  NOT
+    21    276  DOUBLEEQUAL
+    22    277  NOTEQUAL
+    23    278  LESSTHANOREQUALTO
+    24    279  GREATERTHANOREQUALTO
+    25    280  LESSTHAN
+    26    281  GREATERTHAN
+    27    282  BOOLTRUE
+    28    283  BOOLFALSE
+    29    284  AND
+    30    285  OR
+    31    286  WHILE
+    32    287  P
+    33    288  Q
+    34    289  $accept
+    35    290  STMTS
+    36    291  E
+    37    292  T
+    38    293  F
+    39    294  K
+    40    295  B
+    41    296  N
+    42    297  I
+    43    298  V
+    44    299  ABCD
+    45    300  RELOP
+    46    301  BOOLOP
+    47    302  BOOLEXPR
+    48    303  BOOL
+    49    304  STMT
+    50    305  $$1
+    51    306  $$2
+    52    307  $$3
+    53    308  FURTHERIF
+    54    309  $$4
+    55    310  $$5
+    56    311  $$6
+    57    312  $$7
+    58    313  $$8
+    59    314  $$9

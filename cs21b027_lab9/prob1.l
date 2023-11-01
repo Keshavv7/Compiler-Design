@@ -45,6 +45,8 @@ return FLOAT;}
 yylval.dval=atoi(yytext);return POSNUMBER;}
 "if" {//printf("%s",yytext);
 return IF;}
+"switch" {//printf("%s",yytext);
+return SWITCH;}
 "while" {//printf("%s",yytext);
 return WHILE;}
 "else" {//printf("%s",yytext);
