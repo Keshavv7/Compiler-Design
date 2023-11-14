@@ -93,6 +93,10 @@ STMTS: STMT SEP {//printf(" === NORMAL STMT\n");
 		printf("\nL%d:\n", pop(1));
 		} STMTS CLOSECB  FURTHERIF
 
+	| SWITCH OPENB V CLOSEB {
+		genlabel();
+		
+	}
 	| WHILE {push(l++, 2); printf("\nL%d:\n",peek(2));} OPENB BOOLEXPR CLOSEB {
 		push(l++,3);
 		printf("\nIF ( %s === false) go to L%d:\n",$4->string, peek(3));
